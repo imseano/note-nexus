@@ -1,0 +1,20 @@
+{
+  "name": "note-nexus",
+  "version": "1.0.0",
+  "description": "AI Knowledge Base integration app tailored towards markdown files.",
+  "keywords": [
+    "LLM",
+    "KB"
+  ],
+  "license": "ISC",
+  "author": "Sean Oreta",
+  "type": "commonjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^34.0.0"
+  }
+}
