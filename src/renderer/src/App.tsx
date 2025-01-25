@@ -3,7 +3,7 @@ import electronLogo from './assets/electron.svg'
 
 function App(): JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
-  const openHandler = (): void => window.electron.ipcRenderer.send('open-file-dialog')
+  const openHandler = (): void => window.electron.ipcRenderer.send('dialog')
 
   return (
     <>
@@ -18,7 +18,7 @@ function App(): JSX.Element {
       </p>
       <div className="actions">
         <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
+        <a target="_blank" rel="noreferrer" onClick={openHandler}>
             Open Existing Nexus
           </a>
         </div>
