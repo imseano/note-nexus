@@ -3,27 +3,28 @@ import electronLogo from './assets/electron.svg'
 
 function App(): JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  const openHandler = (): void => window.electron.ipcRenderer.send('open-file-dialog')
 
   return (
     <>
       <img alt="logo" className="logo" src={electronLogo} />
       <div className="creator">Powered by electron-vite</div>
       <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
+        Welcome to <span className="react">Note</span>
+        <span className="ts">Nexus</span>
       </div>
       <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
+        Choose an option from the bottom to get started
       </p>
       <div className="actions">
         <div className="action">
           <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
+            Open Existing Nexus
           </a>
         </div>
         <div className="action">
           <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
+            Create A New Nexus
           </a>
         </div>
       </div>
