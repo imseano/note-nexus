@@ -61,7 +61,7 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.on('dialog', () => console.log('ping'))
+  ipcMain.on('open-file-dialog', handleFileOpen)
 
   createWindow()
 

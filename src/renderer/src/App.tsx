@@ -3,7 +3,7 @@ import electronLogo from './assets/electron.svg'
 
 function App(): JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
-  const openHandler = (): void => window.electron.ipcRenderer.send('dialog')
+  const openHandler = (): void => window.electron.ipcRenderer.send('open-file-dialog')
 
   return (
     <>
