@@ -1,0 +1,16 @@
+{
+    "appId": "com.soreta.noteNexus",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "resources/icon.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Development"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+    
+}
