@@ -18,7 +18,7 @@ function App(): JSX.Element {
       </p>
       <div className="actions">
         <div className="action">
-        <a target="_blank" rel="noreferrer" onClick={openHandler}>
+        <a target="_blank" rel="noreferrer">
             Open Existing Nexus
           </a>
         </div>
