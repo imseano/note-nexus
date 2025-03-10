@@ -1,14 +1,29 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
+import tseslint from 'typescript-eslint'
 
-
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
-  {languageOptions: { globals: globals.node }},
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-];
+export default tseslint.config(
+  { ignores: ['**/node_modules', '**/dist', '**/out'] },
+  tseslint.configs.recommended,
+  eslintPluginReact.configs.flat.recommended,
+  eslintPluginReact.configs.flat['jsx-runtime'],
+  {
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    }
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      'react-hooks': eslintPluginReactHooks,
+      'react-refresh': eslintPluginReactRefresh
+    },
+    rules: {
+      ...eslintPluginReactHooks.configs.recommended.rules,
+      ...eslintPluginReactRefresh.configs.vite.rules,
+      'no-unused-vars': 'off',
+      'explicit-function-return-type': 'off'
+    }
+  },
+  eslintConfigPrettier
+)

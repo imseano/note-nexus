@@ -4,7 +4,6 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import fs from 'fs';
 import { getAPIKey } from '@/lib';
-import { preloadTest } from './lib';
 
 
 //async function handleFileOpen () {
