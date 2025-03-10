@@ -2,15 +2,16 @@ import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import fs from 'fs';
 
 
-async function handleFileOpen () {
-  console.log("Opening file dialog")
-  const { canceled, filePaths } = await dialog.showOpenDialog()
-  if (!canceled) {
-    return filePaths[0]
-  }
-}
+//async function handleFileOpen () {
+  //console.log("Opening file dialog")
+  //const { canceled, filePaths } = await dialog.showOpenDialog()
+  //if (!canceled) {
+   // return filePaths[0]
+ // }
+//}
 
 function createWindow(): void {
   // Create the browser window.
@@ -61,7 +62,18 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  ipcMain.on('open-file-dialog', handleFileOpen)
+  ipcMain.handle('select-files', async () => {
+    const result = await dialog.showOpenDialog({
+        properties: ['openDirectory']
+    });
+
+    if (!result.canceled) {
+        const files = fs.readdirSync(result.filePaths[0]).filter(file => file.endsWith('.md'));
+        return files;
+    }
+
+    return [];
+});
 
   createWindow()
 

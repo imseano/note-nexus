@@ -1,9 +1,11 @@
 import Versions from './components/Versions'
+import FileLoader from './components/FileLoader'
 import electronLogo from './assets/electron.svg'
 
 function App(): JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   //const openHandler = (): void => window.electron.ipcRenderer.send('open-file-dialog')
+
 
   return (
     <>
@@ -18,9 +20,7 @@ function App(): JSX.Element {
       </p>
       <div className="actions">
         <div className="action">
-        <a target="_blank" rel="noreferrer">
-            Open Existing Nexus
-          </a>
+          <FileLoader></FileLoader>
         </div>
         <div className="action">
           <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
