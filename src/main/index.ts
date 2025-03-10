@@ -3,6 +3,8 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import fs from 'fs';
+import { getAPIKey } from '@/lib';
+import { preloadTest } from './lib';
 
 
 //async function handleFileOpen () {
@@ -24,7 +26,12 @@ function createWindow(): void {
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
-    }
+    },
+    title: 'NoteNexus',
+    frame: false,
+    titleBarStyle: 'hidden',
+    roundedCorners: true,
+    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {})
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -61,6 +68,7 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.handle('getKey', () => getAPIKey())
 
   ipcMain.handle('select-files', async () => {
     const result = await dialog.showOpenDialog({
@@ -72,8 +80,12 @@ app.whenReady().then(() => {
         return files;
     }
 
+
+
     return [];
 });
+
+
 
   createWindow()
 
