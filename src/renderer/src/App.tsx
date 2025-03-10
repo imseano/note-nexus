@@ -1,35 +1,16 @@
 import Versions from './components/Versions'
 import FileLoader from './components/FileLoader'
 import electronLogo from './assets/electron.svg'
+import { Content, RootLayout, Sidebar } from '@/components'
 
 function App(): JSX.Element {
-  const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+  //const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   //const openHandler = (): void => window.electron.ipcRenderer.send('open-file-dialog')
-
-
   return (
-    <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Welcome to <span className="react">Note</span>
-        <span className="ts">Nexus</span>
-      </div>
-      <p className="tip">
-        Choose an option from the bottom to get started
-      </p>
-      <div className="actions">
-        <div className="action">
-          <FileLoader></FileLoader>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Create A New Nexus
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
-    </>
+    <RootLayout>
+      <Sidebar className="p-2">Hi there</Sidebar>
+      <Content className="p-2 border-1 bg-zinc-900/50 border-1-white/20">I'm not sure</Content>
+    </RootLayout>
   )
 }
 
