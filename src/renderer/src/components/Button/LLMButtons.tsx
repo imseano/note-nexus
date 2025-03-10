@@ -18,7 +18,15 @@ export const TestLLMButton = ({...props}: ComponentProps<'button'>) => {
             messages: [{role: "user", content: content}],
         });
 
-        console.log(response.choices[0].message);
+        const messageContent = response.choices[0].message.content;
+        console.log(messageContent);
+        if (messageContent === null) {
+            return
+        } else {
+            document.getElementById("llm-input").innerHTML = "Input: " + content;
+            document.getElementById("llm-output").innerHTML = "Output: " + messageContent;
+        }
+
     }
 
     const testButton = () => {

@@ -2,7 +2,7 @@ import Versions from './components/Versions'
 import FileLoader from './components/FileLoader'
 import electronLogo from './assets/electron.svg'
 import { Content, RootLayout, Sidebar } from '@/components'
-import { ActionButton, LLMInput, LLMOutput, TestLLMButton, TitleBar } from './components'
+import { ActionButton, LLMInput, LLMInputForm, LLMOutput, TestLLMButton, TitleBar } from './components'
 import { LuNotebookText } from "react-icons/lu";
 
 
@@ -16,8 +16,9 @@ function App(): JSX.Element {
     <RootLayout>
       <Sidebar className="p-2">Hi there</Sidebar>
       <Content className="p-2 border-1 bg-zinc-900/50 border-1-white/20">
-      <LLMInput />
+      <LLMInputForm />
       <TestLLMButton />
+      <LLMInput />
       <LLMOutput />
       </Content>
     </RootLayout>
