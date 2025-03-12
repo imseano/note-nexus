@@ -1,19 +1,11 @@
-import OpenAI from 'openai'
+import { gpt } from '@shared/gpt'
 import { ComponentProps } from 'react'
 import { ActionButton } from './ActionButton'
 export const TestLLMButton = ({ ...props }: ComponentProps<'button'>) => {
-  const key = (window as any).context.getAPIKey()
-
-  const client = new OpenAI({
-    apiKey: key,
-    baseURL: 'https://mockgpt.wiremockapi.cloud/v1',
-    dangerouslyAllowBrowser: true
-  })
-
-  const content = 'Hello, world!'
+  const content = 'Hello, how are you?'
 
   async function testOpenAI() {
-    const response = await client.chat.completions.create({
+    const response = await gpt.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: content }]
     })
