@@ -1,6 +1,16 @@
-import { Content, RootLayout, Sidebar } from '@/components'
+import {
+  Content,
+  FileList,
+  FileLoader,
+  LLMInput,
+  LLMInputForm,
+  LLMOutput,
+  RootLayout,
+  Sidebar,
+  TestLLMButton,
+  TitleBar
+} from '@/components'
 import { LuNotebookText } from 'react-icons/lu'
-import { LLMInput, LLMInputForm, LLMOutput, TestLLMButton, TitleBar } from './components'
 
 function App(): JSX.Element {
   //const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
@@ -10,9 +20,12 @@ function App(): JSX.Element {
       <TitleBar>
         <LuNotebookText />
         <p className="p-2">NoteNexus</p>
+        <FileLoader className="border  border-zinc-400/50 hover:bg-zinc-600/50 transition-colors duration-100" />
       </TitleBar>
       <RootLayout>
-        <Sidebar className="p-2">I'm just a placeholder don't look at me</Sidebar>
+        <Sidebar className="p-2">
+          <FileList />
+        </Sidebar>
         <Content className="p-2 border-1 bg-zinc-900/50 border-1-white/20">
           <LLMInputForm />
           <TestLLMButton />

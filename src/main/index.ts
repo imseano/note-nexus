@@ -1,17 +1,15 @@
-import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+import { getAPIKey, getFilesFromDir, openFolder } from '@/lib'
+import { electronApp, is, optimizer } from '@electron-toolkit/utils'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import fs from 'fs';
-import { getAPIKey } from '@/lib';
-
 
 //async function handleFileOpen () {
-  //console.log("Opening file dialog")
-  //const { canceled, filePaths } = await dialog.showOpenDialog()
-  //if (!canceled) {
-   // return filePaths[0]
- // }
+//console.log("Opening file dialog")
+//const { canceled, filePaths } = await dialog.showOpenDialog()
+//if (!canceled) {
+// return filePaths[0]
+// }
 //}
 
 function createWindow(): void {
@@ -66,25 +64,9 @@ app.whenReady().then(() => {
   })
 
   // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
   ipcMain.handle('getKey', () => getAPIKey())
-
-  ipcMain.handle('select-files', async () => {
-    const result = await dialog.showOpenDialog({
-        properties: ['openDirectory']
-    });
-
-    if (!result.canceled) {
-        const files = fs.readdirSync(result.filePaths[0]).filter(file => file.endsWith('.md'));
-        return files;
-    }
-
-
-
-    return [];
-});
-
-
+  ipcMain.handle('openFolder', () => openFolder())
+  ipcMain.handle('getFilesFromDir', (_, ...args: [string]) => getFilesFromDir(...args))
 
   createWindow()
 

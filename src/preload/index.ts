@@ -1,5 +1,5 @@
-import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer } from 'electron'
 
 // Custom APIs for renderer
 const api = {}
@@ -12,7 +12,9 @@ if (process.contextIsolated) {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
     contextBridge.exposeInMainWorld('context', {
-      getAPIKey: () => ipcRenderer.invoke('getKey')
+      getAPIKey: () => ipcRenderer.invoke('getKey'),
+      openFolder: () => ipcRenderer.invoke('openFolder'),
+      getFilesFromDir: (...args: [string]) => ipcRenderer.invoke('getFilesFromDir', ...args)
     })
   } catch (error) {
     console.error(error)
