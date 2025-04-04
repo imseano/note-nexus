@@ -1,9 +1,10 @@
-import { rootDirAtom } from '@renderer/store'
+import { fileListLoadingAtom, rootDirAtom } from '@renderer/store'
 import { useSetAtom } from 'jotai'
 import { ComponentProps } from 'react'
 
 export const FileLoader = ({ ...props }: ComponentProps<'button'>) => {
   const setRootDir = useSetAtom(rootDirAtom)
+  const setFileListLoading = useSetAtom(fileListLoadingAtom)
 
   const handleFileLoad = async () => {
     const filename = await (window as any).context.openFolder()
@@ -11,6 +12,7 @@ export const FileLoader = ({ ...props }: ComponentProps<'button'>) => {
     const fileList = await (window as any).context.getFilesFromDir(filename)
     console.log(fileList)
     setRootDir(filename)
+    setFileListLoading(true)
   }
 
   return (

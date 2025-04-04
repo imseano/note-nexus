@@ -10,9 +10,12 @@ import {
   TestLLMButton,
   TitleBar
 } from '@/components'
+import { fileListLoadingAtom } from '@renderer/store'
+import { useAtomValue } from 'jotai'
 import { LuNotebookText } from 'react-icons/lu'
 
 function App(): JSX.Element {
+  const useFileListLoading = useAtomValue(fileListLoadingAtom)
   //const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
   //const openHandler = (): void => window.electron.ipcRenderer.send('open-file-dialog')
   return (
@@ -27,10 +30,18 @@ function App(): JSX.Element {
           <FileList />
         </Sidebar>
         <Content className="p-2 border-1 bg-zinc-900/50 border-1-white/20">
-          <LLMInputForm />
-          <TestLLMButton />
-          <LLMInput />
-          <LLMOutput />
+          {useFileListLoading ? (
+            <>
+              <LLMInputForm />
+              <TestLLMButton />
+              <LLMInput />
+              <LLMOutput />
+            </>
+          ) : (
+            <>
+              <p>No file collection loaded rip</p>
+            </>
+          )}
         </Content>
       </RootLayout>
     </div>
