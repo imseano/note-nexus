@@ -138,3 +138,8 @@ dist
 # Keys
 keys.json
 .qodo
+
+resources/chroma-env
+.nexus
+test-directory
+backend

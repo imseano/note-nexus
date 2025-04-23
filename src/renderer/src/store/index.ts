@@ -13,6 +13,9 @@ export const contextAtom = atom<string | null>(null)
 
 export const fileListLoadingAtom = atom<boolean>(false)
 
+export const lastInputAtom = atom<string | null>(null)
+export const lastOutputAtom = atom<string | null>(null)
+
 //**const loadFileList = async () => {
 // const myRoot = await (window as any).context.getRootDir()
 // const fileList = await (window as any).context.getFilesFromDir/(myRoot)
