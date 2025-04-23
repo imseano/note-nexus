@@ -3,6 +3,7 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
 import icon from '../../resources/icon.png?asset'
+import { launchBackend } from './lib/backendController'
 
 //async function handleFileOpen () {
 //console.log("Opening file dialog")
@@ -68,6 +69,7 @@ app.whenReady().then(() => {
   ipcMain.handle('openFolder', () => openFolder())
   ipcMain.handle('getFilesFromDir', (_, ...args: [string]) => getFilesFromDir(...args))
 
+  launchBackend()
   createWindow()
 
   app.on('activate', function () {
