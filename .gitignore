@@ -134,3 +134,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Keys
+keys.json
+.qodo
+
+resources/chroma-env
+.nexus
+test-directory
+backend

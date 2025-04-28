@@ -1,16 +1,17 @@
-import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+import { getAPIKey, getFilesFromDir, openFolder } from '@/lib'
+import { electronApp, is, optimizer } from '@electron-toolkit/utils'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { launchBackend } from './lib/backendController'
 
-
-async function handleFileOpen () {
-  console.log("Opening file dialog")
-  const { canceled, filePaths } = await dialog.showOpenDialog()
-  if (!canceled) {
-    return filePaths[0]
-  }
-}
+//async function handleFileOpen () {
+//console.log("Opening file dialog")
+//const { canceled, filePaths } = await dialog.showOpenDialog()
+//if (!canceled) {
+// return filePaths[0]
+// }
+//}
 
 function createWindow(): void {
   // Create the browser window.
@@ -23,7 +24,12 @@ function createWindow(): void {
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
-    }
+    },
+    title: 'NoteNexus',
+    frame: false,
+    titleBarStyle: 'hidden',
+    roundedCorners: true,
+    ...(process.platform !== 'darwin' ? { titleBarOverlay: true } : {})
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -59,10 +65,11 @@ app.whenReady().then(() => {
   })
 
   // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  ipcMain.handle('getKey', () => getAPIKey())
+  ipcMain.handle('openFolder', () => openFolder())
+  ipcMain.handle('getFilesFromDir', (_, ...args: [string]) => getFilesFromDir(...args))
 
-  ipcMain.on('open-file-dialog', handleFileOpen)
-
+  launchBackend()
   createWindow()
 
   app.on('activate', function () {
