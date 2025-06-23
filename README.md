@@ -32,3 +32,6 @@ $ npm run build:mac
 # For Linux
 $ npm run build:linux
 ```
+
+### Report
+- [Proposal](https://docs.google.com/document/d/1booOWPggXlNp-oSVWGpY-PGoMXkkVqFs5cKlXxFlnaM/edit?usp=sharing)
